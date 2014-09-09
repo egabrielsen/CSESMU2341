@@ -30,9 +30,9 @@ int main(int argc, char* argv[]) {
         int capacity = 10;
         int mCapacity = 30;
         char* sTeamA = argv[1]; // -- stores the Team 1 name of the file uploaded on Command Line
-        char** cTeamA = new char*[capacity];;  // -- initialize char array that stores team info
+        char** cTeamA = new char*[capacity];  // -- initialize char array that stores team info
         char* sTeamB = argv[2];  // -- stores the Team 1 name of the file uploaded on Command Line
-        char** cTeamB = new char*[capacity];; // -- initializes char array that stores team info
+        char** cTeamB = new char*[capacity]; // -- initializes char array that stores team info
         char* Smatch = argv[3];
         char** match = new char*[mCapacity];
         char* verbosity = argv[5];
@@ -42,7 +42,7 @@ int main(int argc, char* argv[]) {
         getMatchInfo(Smatch, match);
 
         ofstream outputFile;  // -- open up the output file for storing the information
-        outputFile.open ("output.txt");
+        outputFile.open (argv[4]);
 
         // -- display the info based on vlow, vmed, vhigh
         if (strcmp(verbosity, "vlow") == 0)
@@ -66,7 +66,7 @@ int main(int argc, char* argv[]) {
 
 void getTeamInfo(char* s, char** team) {
     // -- initializes a file from the ___.txt file in main for the team info
-    ifstream in_file(s, ios::binary);
+    ifstream in_file(s);
 
     // -- checks to see if file is open
     if (!in_file.is_open()) {
@@ -119,7 +119,6 @@ void displayLowVerbosity(char** match, char** teamA, char** teamB, ostream &out)
 
     for (int i = 1; i < mSize; i++) { //this for loop stores the match info into tagInfo
         tagInfo[i-1] = match[i]; // -- sets the match info equal to the newTagInfo to use in winningInfo function
-
     }
 
     winningInfo(tagInfo, teamA, teamB, mSize, teamAscore, teamBscore, out); //function displays winning info
@@ -184,11 +183,7 @@ int individualTags(char** tags, char** teamA, char** teamB, int size) {
 
 
     for (int i = 1; i < max; i = i + 4) {
-        //cout << tags[i] << endl << teamA[i] << endl << teamB[i] << endl;
 
-        //if (strncmp(tags[i], teamA[i], 1) == 0 && strncmp(tags[i], teamB[i], 1) == 0 ) {
-        //    numberOfTags++;
-        //}
     }
 
     return numberOfTags;
@@ -261,6 +256,8 @@ void winningInfo(char** tags, char** teamA1, char** teamB2, int size, int teamAs
 
     }
 
+    teamAscore = teamAscore - 5;
+
     out << endl;
     // -- output for text file on winners and scores for each team
     out << teamA1[1] << ": " << teamAscore << " points" << endl;
@@ -272,8 +269,6 @@ void winningInfo(char** tags, char** teamA1, char** teamB2, int size, int teamAs
         out << "Overall Winners: " << teamB2[1] << endl;
     else
         out << "Its a Tie!!" << endl;
-
-
 
 }
 
@@ -289,28 +284,3 @@ int assignScore(char** tags, int teamScore, int i) {
     else
         return teamScore = teamScore + 15;
 }
-
-/*int temp3size = 0;
-int* tempTagged = new int[capacity];
-for (int i = 1; i < size; i = i + 4) {
-    if (strncmp(tags[i], "1", 1) == 0) {
-        tempTagged[temp3size] = 1;
-        temp3size++;
-    } else if (strncmp(tags[i], "2", 1) == 0) {
-        tempTagged[temp3size] = 1;
-        temp3size++;
-    } else if (strncmp(tags[i], "3", 1) == 0) {
-        tempTagged[temp3size] = 1;
-        temp3size++;
-    } else if (strncmp(tags[i], "4", 1) == 0) {
-        tempTagged[temp3size] = 2;
-        temp3size++;
-    } else if (strncmp(tags[i], "5", 1) == 0) {
-        tempTagged[temp3size] = 2;
-        temp3size++;
-    } else if (strncmp(tags[i], "6", 1) == 0) {
-        tempTagged[temp3size] = 2;
-        temp3size++;
-    }
-
-}*/
