@@ -1,0 +1,30 @@
+The Cowboys
+   Erik tagged Parker 1 times
+   Erik tagged Farley 0 times
+   Erik tagged Ali 0 times
+   Erik had a total of 1 tags
+   Liz tagged Parker 0 times
+   Liz tagged Farley 1 times
+   Liz tagged Ali 0 times
+   Liz had a total of 1 tags
+   Weston tagged Parker 0 times
+   Weston tagged Farley 1 times
+   Weston tagged Ali 0 times
+   Weston had a total of 1 tags
+The Sharks
+   Parker tagged Erik 0 times
+   Parker tagged Liz 0 times
+   Parker tagged Weston 1 times
+   Parker had a total of 1 tags
+   Farley tagged Erik 0 times
+   Farley tagged Liz 1 times
+   Farley tagged Weston 0 times
+   Farley had a total of 1 tags
+   Ali tagged Erik 2 times
+   Ali tagged Liz 0 times
+   Ali tagged Weston 0 times
+   Ali had a total of 2 tags
+
+The Cowboys: 18 points
+The Sharks: 33 points
+Overall Winners: The Sharks
