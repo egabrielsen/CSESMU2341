@@ -19,7 +19,7 @@ void getTeamInfo(char*, char** team);
 void winningInfo(char** tags, char** teamA, char** teamB, int size, int teamAscore, int teamBscore, ostream &out);
 int assignScore(char** tags, int teamScore, int i);
 int tagTotal(char** tags, char** team, int size);
-int individualTags(char** tags, char** teamA, char** teamB, int size);
+int individualTags(char** tags, char** teamA, char** teamB, int size1, int size2, int teamNumber);
 
 int main(int argc, char* argv[]) {
     // -- check the number of Arguments in Command Line
@@ -126,7 +126,7 @@ void displayLowVerbosity(char** match, char** teamA, char** teamB, ostream &out)
 
 void displayMediumVerbosity(char** match, char** teamA, char** teamB, char* sTeamA, char* sTeamB, ostream &out) {
 
-    out << endl << teamA[1] << endl; // -- display team1 name
+    out << endl << teamA[0] << " " << teamA[1] << endl; // -- display team1 name
     int size = 9;
 
     // -- for loop that goes through each player of teamA and finds number of tags
@@ -135,7 +135,7 @@ void displayMediumVerbosity(char** match, char** teamA, char** teamB, char* sTea
         out << teamA[i] << " had a total of " << tagTotal(match, teamA, i) << " tags" << endl;
     }
 
-    out << endl << endl << teamB[1] << endl; // -- display team2 name
+    out << endl << endl << teamB[0] << " " << teamB[1] << endl; // -- display team2 name
     int sizeB = 9;
 
     // -- for loop that goes through each player of teamB and finds number of tags per player
@@ -149,44 +149,56 @@ void displayHighVerbosity(char** match, char** teamA, char** teamB, ostream &out
     int size = 0;
     int size2 = 0;
 
+    // -- Find the size of each teams array for sorting data
     while (teamA[size] != NULL)
         size++;
     while (teamB[size2] != NULL)
         size2++;
 
-    cout << teamA[0] << " " << teamA[1] << endl;
+    out << teamA[0] << " " << teamA[1] << endl; // output teamName as title
 
+    // -- embedded for loop to search through match file and then call "individualTags" and then display it
     for (int i = 4; i < size; i = i + 2) {
         for (int j = 4; j < size2; j = j + 2) {
-            cout << "   " << teamA[i] << " tagged " << teamB[j] << " " << individualTags(match, teamA, teamB, size) << " times" << endl;
+            out << "   " << teamA[i] << " tagged " << teamB[j] << " " << individualTags(match, teamA, teamB, i, j, 1) << " times" << endl;
         }
-        cout << "   " << teamA[i] << " had a total of " << tagTotal(match, teamA, i) << " tags" << endl;
+        out << "   " << teamA[i] << " had a total of " << tagTotal(match, teamA, i) << " tags" << endl;
     }
 
-    cout << teamB[0] << " " << teamB[1] << endl;
+    out << teamB[0] << " " << teamB[1] << endl; // output teamName as title
 
+    // -- embedded for loop to search through match file and then call "individualTags" and then display it
     for (int i = 4; i < size2; i = i + 2) {
         for (int j = 4; j < size; j = j + 2) {
-            cout << "   " << teamB[i] << " tagged " << teamA[j] << " " << individualTags(match, teamA, teamB, size) << " times" << endl;
+            out << "   " << teamB[i] << " tagged " << teamA[j] << " " << individualTags(match, teamA, teamB, i, j, 2) << " times" << endl;
         }
-        cout << "   " << teamB[i] << " had a total of " << tagTotal(match, teamB, i) << " tags" << endl;
+        out << "   " << teamB[i] << " had a total of " << tagTotal(match, teamB, i) << " tags" << endl;
     }
 
 }
 
-int individualTags(char** tags, char** teamA, char** teamB, int size) {
-    int max = 0;
-    int numberOfTags = 0;
+int individualTags(char** tags, char** teamA, char** teamB, int size1, int size2, int teamNumber) {
+    int max = 0; // max of tags array
+    int numberOfTags = 0; // numberOfTags
 
     while (tags[max] != NULL)
         max++;
 
-
-    for (int i = 1; i < max; i = i + 4) {
-
+    if (teamNumber == 1) { // if teamA is selected
+        for (int i = 1; i < max; i = i + 4) { // boolean logic to determine numberOfTags
+            if (strncmp(tags[i], teamA[size1 - 1], 1) == 0 && strncmp(tags[i + 1], teamB[size2 - 1], 1) == 0) {
+              numberOfTags++;
+            }
+        }
+    } else { // if teamB is selected
+        for (int i = 1; i < max; i = i + 4) { // boolean logic to determine numberOfTags
+            if (strncmp(tags[i], teamB[size1 - 1], 1) == 0 && strncmp(tags[i + 1], teamA[size2 - 1], 1) == 0) {
+              numberOfTags++;
+            }
+        }
     }
 
-    return numberOfTags;
+    return numberOfTags; // return numberOfTags
 }
 
 int tagTotal(char** tags, char** team, int size) {
@@ -260,13 +272,13 @@ void winningInfo(char** tags, char** teamA1, char** teamB2, int size, int teamAs
 
     out << endl;
     // -- output for text file on winners and scores for each team
-    out << teamA1[1] << ": " << teamAscore << " points" << endl;
-    out << teamB2[1] << ": " << teamBscore << " points" << endl;
+    out << teamA1[0] << " " << teamA1[1] << ": " << teamAscore << " points" << endl;
+    out << teamB2[0] << " " << teamB2[1] << ": " << teamBscore << " points" << endl;
 
     if (teamAscore > teamBscore)
-        out << "Overall Winners: " << teamA1[1] << endl;
+        out << "Overall Winners: " << teamA1[0] << " " << teamA1[1] << endl;
     else if (teamBscore > teamAscore)
-        out << "Overall Winners: " << teamB2[1] << endl;
+        out << "Overall Winners: " << teamB2[0] << " " << teamB2[1] << endl;
     else
         out << "Its a Tie!!" << endl;
 
