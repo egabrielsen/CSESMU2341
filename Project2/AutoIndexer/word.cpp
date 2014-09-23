@@ -79,7 +79,7 @@ int Word::getIndex() {
     return wordIndex;
 }
 
-void Word::sortWords(int size, ostream &out) {
+void Word::sortWords(int size, ostream &out, char** pages) {
     char* temp = new char[size];
 
     // -- sorting algorithm, organizes everything alphabetically
@@ -101,19 +101,39 @@ void Word::sortWords(int size, ostream &out) {
             // -- if a letter has multiple words, this will display all of them
             if (strncmp(words[i], words[i - 1], 1) == 0) {
                 out << "[" << *words[i] << "]"<< endl;
-                out << getPageNumbers(words[i], size) << endl;
-                out << getPageNumbers(words[i - 1], size) << endl;
+                out << words[i] << " " << getPageNumbers(words[i], size, pages) << endl;
+                out << words[i - 1] << " " << getPageNumbers(words[i - 1], size, pages) << endl;
                 i--;
             } else {
                 out << "[" << *words[i] << "]"<< endl;
-                out << getPageNumbers(words[i], size) << endl;
+                out << words[i] << " " << getPageNumbers(words[i], size, pages) << endl;
             }
         }
     }
 }
 
-char* Word::getPageNumbers(char* word, int size) {
-    // -- impliment code to sort page numbers here
-    return word;
+char* Word::getPageNumbers(char* word, int size, char** pages) {
+    // implement page algorithm
+
+
+    return pages[1];
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

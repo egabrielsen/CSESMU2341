@@ -67,13 +67,10 @@ void Page::getInfo(char * file, char** info) {
     }
 
     f.close();
-
 }
 
-
-
-void Page::getPage() {
-    cout << "got page" << endl;
+char** Page::getPage() {
+    return pages;
 }
 
 Page::~Page() {

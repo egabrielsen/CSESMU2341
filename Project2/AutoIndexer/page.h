@@ -16,7 +16,7 @@ public:
     Page();
     ~Page();
     void getFileSize(char*);
-    void getPage();
+    char** getPage();
     int getCapacity();
     void getInfo(char*, char**);
 

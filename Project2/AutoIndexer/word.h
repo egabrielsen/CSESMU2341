@@ -19,9 +19,9 @@ public:
     void getWordSize(char*);
     int getCapacity();
     void getWords(char*, char**);
-    void sortWords(int, ostream&);
+    void sortWords(int, ostream&, char**);
     int getIndex();
-    char* getPageNumbers(char*, int);
+    char* getPageNumbers(char*, int, char**);
 };
 
 #endif // WORD_H

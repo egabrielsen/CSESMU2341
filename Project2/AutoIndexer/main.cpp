@@ -28,7 +28,7 @@ int main(int argc, char* argv[]) {
     word->getWords(argv[1], information); // gets the words and stores into an array
     ofstream output;
     output.open(argv[2]);
-    word->sortWords(word->getIndex(), output);
+    word->sortWords(word->getIndex(), output, page->getPage());
     output.close();
 
     //Deconstruction
