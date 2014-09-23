@@ -1,6 +1,6 @@
 <15>
-algorithm [binary tree] analysis heap
-<1>
+word1 word2 [binary tree] word3
+<3>
 [binary search tree] analysis
 complexity algorithm [2-3 tree]
 <5> 

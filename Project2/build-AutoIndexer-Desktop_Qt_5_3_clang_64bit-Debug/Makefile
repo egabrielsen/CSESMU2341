@@ -45,8 +45,10 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../AutoIndexer/main.cpp 
-OBJECTS       = main.o
+SOURCES       = ../AutoIndexer/main.cpp \
+		../AutoIndexer/page.cpp 
+OBJECTS       = main.o \
+		page.o
 DIST          = ../../../Desktop/QT/5.3/clang_64/mkspecs/features/spec_pre.prf \
 		../../../Desktop/QT/5.3/clang_64/mkspecs/qdevice.pri \
 		../../../Desktop/QT/5.3/clang_64/mkspecs/features/device_config.prf \
@@ -142,6 +144,7 @@ DIST          = ../../../Desktop/QT/5.3/clang_64/mkspecs/features/spec_pre.prf \
 		../../../Desktop/QT/5.3/clang_64/mkspecs/features/qt_config.prf \
 		../../../Desktop/QT/5.3/clang_64/mkspecs/macx-clang/qmake.conf \
 		../../../Desktop/QT/5.3/clang_64/mkspecs/features/spec_post.prf \
+		../AutoIndexer/.qmake.stash \
 		../../../Desktop/QT/5.3/clang_64/mkspecs/features/exclusive_builds.prf \
 		../../../Desktop/QT/5.3/clang_64/mkspecs/features/default_pre.prf \
 		../../../Desktop/QT/5.3/clang_64/mkspecs/features/mac/default_pre.prf \
@@ -157,7 +160,8 @@ DIST          = ../../../Desktop/QT/5.3/clang_64/mkspecs/features/spec_pre.prf \
 		../../../Desktop/QT/5.3/clang_64/mkspecs/features/exceptions.prf \
 		../../../Desktop/QT/5.3/clang_64/mkspecs/features/yacc.prf \
 		../../../Desktop/QT/5.3/clang_64/mkspecs/features/lex.prf \
-		../AutoIndexer/AutoIndexer.pro ../AutoIndexer/main.cpp
+		../AutoIndexer/AutoIndexer.pro ../AutoIndexer/main.cpp \
+		../AutoIndexer/page.cpp
 QMAKE_TARGET  = AutoIndexer
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = AutoIndexer
@@ -295,6 +299,7 @@ Makefile: ../AutoIndexer/AutoIndexer.pro ../../../Desktop/QT/5.3/clang_64/mkspec
 		../../../Desktop/QT/5.3/clang_64/mkspecs/features/qt_config.prf \
 		../../../Desktop/QT/5.3/clang_64/mkspecs/macx-clang/qmake.conf \
 		../../../Desktop/QT/5.3/clang_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../../Desktop/QT/5.3/clang_64/mkspecs/features/exclusive_builds.prf \
 		../../../Desktop/QT/5.3/clang_64/mkspecs/features/default_pre.prf \
 		../../../Desktop/QT/5.3/clang_64/mkspecs/features/mac/default_pre.prf \
@@ -407,6 +412,7 @@ Makefile: ../AutoIndexer/AutoIndexer.pro ../../../Desktop/QT/5.3/clang_64/mkspec
 ../../../Desktop/QT/5.3/clang_64/mkspecs/features/qt_config.prf:
 ../../../Desktop/QT/5.3/clang_64/mkspecs/macx-clang/qmake.conf:
 ../../../Desktop/QT/5.3/clang_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../../../Desktop/QT/5.3/clang_64/mkspecs/features/exclusive_builds.prf:
 ../../../Desktop/QT/5.3/clang_64/mkspecs/features/default_pre.prf:
 ../../../Desktop/QT/5.3/clang_64/mkspecs/features/mac/default_pre.prf:
@@ -463,6 +469,9 @@ compiler_clean:
 
 main.o: ../AutoIndexer/main.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../AutoIndexer/main.cpp
+
+page.o: ../AutoIndexer/page.cpp ../AutoIndexer/page.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o page.o ../AutoIndexer/page.cpp
 
 ####### Install
 

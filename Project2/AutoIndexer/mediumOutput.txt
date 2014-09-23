@@ -1,0 +1,24 @@
+<15>
+algorithm [binary tree] analysis heap
+<1>
+[binary search tree] analysis
+complexity algorithm [2-3 tree]
+<5>
+tree [b+ tree] [Binary Tree]
+<8>
+graph clique Tree
+<5>
+tree [full binary tree]
+[complete binary tree]
+<2>
+apple banana orange
+<4>
+erik weston liz
+<6>
+hello hi [how are you]
+<20>
+welcome integer finder
+<45> 
+proof example 
+[please read]
+<-1>

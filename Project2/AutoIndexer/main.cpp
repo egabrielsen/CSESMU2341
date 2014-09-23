@@ -4,50 +4,45 @@
 
 #include <iostream>
 #include <fstream>
+#include <cstring>
+#include "page.h"
+#include "page.cpp"
+#include "word.h"
+#include "word.cpp"
 
 using namespace std;
 
-void resize(char**& d, int& cap);
-void readFile(char *, char**, int**);
+// -- declare functions
 void checkCommandLine(int);
 
 int main(int argc, char* argv[]) {
-    checkCommandLine(argc);
 
-    int capacity = 10; // start the array off with 10 free spaces and add more space as file is read
-    char* file = argv[1];
-    char** words = new char*[capacity];
-    int** pages = new int*[capacity];
+    checkCommandLine(argc); // check number of arguments in command line
+    Page *page = new Page(); // create a page object that will store page numbers
+    page->getFileSize(argv[1]);  // get the file size of the input
+    char** information = new char*[page->getCapacity()]; // create an array that will store all elements in input
+    page->getInfo(argv[1], information); // gets the page numbers from info
 
-    readFile(file, words, pages);
+    Word *word = new Word(); // create a word object that stores all words
+    word->getWordSize(argv[1]); // get the file size of input for word
+    word->getWords(argv[1], information); // gets the words and stores into an array
+    ofstream output;
+    output.open(argv[2]);
+    word->sortWords(word->getIndex(), output);
+    output.close();
 
-    cout << "Hello" << endl;
+    //Deconstruction
+    word->~Word();
+    delete[] *information;
+    page->~Page();
+
     return 0;
 }
 
-void readFile(char * f, char ** w, int** p) {
-    ifstream file(f);
-
-    if (!file.is_open()) {
-        cout << "File not opened..." << endl;
-    }
-
-    //read in file
-
-    file.close();
-}
-
+// -- Fuction checks the number of arguments in command line
 void checkCommandLine(int a) {
     if (a != 3)
         cout <<  "Invalid number of Arguments\nExpected ./a.out <input.txt> <output.txt>" << endl;
 }
 
-void resize(char **&d, int &cap) {
-    char** temp = new char*[cap + 10];
-    for (int i = 0; i < cap; i++) {
-        temp[i] = d[i];
-    }
-    delete[] d;
-    d = temp;
-    cap += 10;
-}
+

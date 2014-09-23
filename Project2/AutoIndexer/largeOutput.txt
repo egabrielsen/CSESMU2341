@@ -1,0 +1,110 @@
+<15>
+algorithm [binary tree] analysis heap 
+<1>
+[binary search tree] analysis
+complexity algorithm [2-3 tree] 
+<5> 
+tree [b+ tree] [Binary Tree]
+<8> 
+graph clique Tree
+<5> 
+tree [full binary tree]
+[complete binary tree]
+<2>
+apple banana orange
+<4> 
+erik weston liz
+<6>
+hello hi [how are you]
+<20>
+algorithm [binary tree] analysis heap 
+<100>
+[binary search tree] analysis
+complexity algorithm [2-3 tree] 
+<200> 
+tree [b+ tree] [Binary Tree]
+<45> 
+graph clique Tree
+<28> 
+tree [full binary tree]
+[complete binary tree]
+<78>
+apple banana orange
+<93> 
+erik weston liz
+<11>
+hello hi [how are you]
+<15>
+algorithm [binary tree] analysis heap
+<1>
+[binary search tree] analysis
+complexity algorithm [2-3 tree]
+<5>
+tree [b+ tree] [Binary Tree]
+<8>
+graph clique Tree
+<5>
+tree [full binary tree]
+[complete binary tree]
+<2>
+apple banana orange
+<4>
+erik weston liz
+<6>
+hello hi [how are you]
+<15>
+algorithm [binary tree] analysis heap
+<1>
+[binary search tree] analysis
+complexity algorithm [2-3 tree]
+<5>
+tree [b+ tree] [Binary Tree]
+<8>
+graph clique Tree
+<5>
+tree [full binary tree]
+[complete binary tree]
+<2>
+apple banana orange
+<4>
+erik weston liz
+<6>
+hello hi [how are you]
+<15>
+algorithm [binary tree] analysis heap
+<1>
+[binary search tree] analysis
+complexity algorithm [2-3 tree]
+<5>
+tree [b+ tree] [Binary Tree]
+<8>
+graph clique Tree
+<5>
+tree [full binary tree]
+[complete binary tree]
+<2>
+apple banana orange
+<4>
+erik weston liz
+<6>
+hello hi [how are you]
+<15>
+algorithm [binary tree] analysis heap
+<1>
+[binary search tree] analysis
+complexity algorithm [2-3 tree]
+<5>
+tree [b+ tree] [Binary Tree]
+<8>
+graph clique Tree
+<5>
+tree [full binary tree]
+[complete binary tree]
+<2>
+apple banana orange
+<4>
+erik weston liz
+<6>
+hello hi [how are you]
+
+<-1>
