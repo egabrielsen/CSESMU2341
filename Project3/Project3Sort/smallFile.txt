@@ -1,0 +1,15 @@
+Welcome to c++
+
+This lab demonstrates how to create an efficient algorithm that will 
+effectively sort the following words in order of most letters and 
+also sort in alphabetical order. To do this I will spend a lot of time each 
+day developing algorithms to solve this problem.
+
+This is a short text file that will be used to test 
+my algorithm and speed in order to complete the project.
+
+I was born on June 2, 1995 in Houston, Texas.  I went to highschool at 
+Dripping Springs and played Baseball and Basketball. 
+
+The other text files will consist of a lot more words. Again this is just 
+a sample small size to test my program. So yayyyyyyyyyyyyyyyyy.
