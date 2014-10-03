@@ -18,8 +18,10 @@ public:
     bool readData();
     bool prepareData();
     void sortData();
-    void sortingAlg(char**, int, int);
-    int partition(char**, int, int);
+    void sizeSortingAlg(char**, long, long);
+    void alphabetize(char**, long, long);
+    long partition(char**, long, long);
+    long partitionA(char**, long, long);
     void outputData(const string&);
     ~SortingCompetition();
 
