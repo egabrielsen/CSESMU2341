@@ -69,6 +69,7 @@ void SortingCompetition::sortData() {
    alphabetize(copyInfo, 0, fileCapacity - 1);
 }
 
+// -- adapted from:
 void SortingCompetition::alphabetize(char ** words, long start, long end) {
     if (end - start < 2) {
         return;

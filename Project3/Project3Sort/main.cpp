@@ -21,11 +21,11 @@ int main(int argc, char* argv[])  {
         while (game->readData() && game->prepareData()) {
             start = chrono::system_clock::now();
             game->sortData();
-            game->outputData(argv[2]);
+
             end = chrono::system_clock::now();
             chrono::duration<double> elapsed_seconds = end - start;
             time_t end_time = chrono::system_clock::to_time_t(end);
-
+            game->outputData(argv[2]);
             game->~SortingCompetition();
 
             cout << "finished computation at " << ctime(&end_time) << "elapsed time: " << elapsed_seconds.count() << "s/n";
