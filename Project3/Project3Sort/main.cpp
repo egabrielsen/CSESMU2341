@@ -16,9 +16,10 @@ int main(int argc, char* argv[])  {
     if(checkCommandLine(argc)) {
         chrono::time_point<chrono::system_clock> start, end;
 
-        SortingCompetition *game = new SortingCompetition(argv[1]);
+        SortingCompetition *game = new SortingCompetition();
+        game->setFileName(argv[1]);
 
-        while (game->readData() && game->prepareData()) {
+        if (game->readData() && game->prepareData()) {
             start = chrono::system_clock::now();
             game->sortData();
 
@@ -26,11 +27,23 @@ int main(int argc, char* argv[])  {
             chrono::duration<double> elapsed_seconds = end - start;
             time_t end_time = chrono::system_clock::to_time_t(end);
             game->outputData(argv[2]);
-            game->~SortingCompetition();
+            //game->~SortingCompetition();
 
-            cout << "finished computation at " << ctime(&end_time) << "elapsed time: " << elapsed_seconds.count() << "s/n";
-            break;
+            cout << "finished computation at " << ctime(&end_time) << "elapsed time: " << elapsed_seconds.count() << "s/n\n";
+
+        } else {
+            cout << "File is empty" << endl;
+            game->outputData(argv[2]);
         }
+
+        //SortingCompetition *game1 = new SortingCompetition(argv[1]);
+
+        /*while (game->readData() && game->prepareData()) {
+            game->sortData();
+            game->outputData(argv[2]);
+            break;
+        }*/
+
     }
     return 0;
 }
