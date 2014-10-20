@@ -1,60 +1,49 @@
 #include <iostream>
-#include <cstring>
 #include <chrono>
-#include <ctime>
-#include <fstream>
-#include <ostream>
-#include "string.h"
-#include "sortingcompetition.h"
+#include "SortingCompetition.h"
 #include "sortingcompetition.cpp"
 
-using namespace std;
+int main(int argc, char** argv)
+{
+    if (argc != 3)
+    {
+        std::cerr << "Invalid arguments" << std::endl;
+        std::cerr << "Usage: ./a.out <input file> <output file>" << std::endl;
+        return 1;
+    }
 
-bool checkCommandLine(int);
+    //Number of times to run sort
+    const int NUM_REPS = 5;
+    unsigned int totalMilliseconds = 0;
 
-int main(int argc, char* argv[])  {
-    if(checkCommandLine(argc)) {
-        chrono::time_point<chrono::system_clock> start, end;
+    //Create the sorter object and load the data from a file
+    SortingCompetition sorter(argv[1]);
+    if (!sorter.readData())
+    {
+        std::cerr << "Error reading data" << std::endl;
+        return 1;
+    }
 
-        SortingCompetition *game = new SortingCompetition();
-        game->setFileName(argv[1]);
-
-        if (game->readData() && game->prepareData()) {
-            start = chrono::system_clock::now();
-            game->sortData();
-
-            end = chrono::system_clock::now();
-            chrono::duration<double> elapsed_seconds = end - start;
-            time_t end_time = chrono::system_clock::to_time_t(end);
-            game->outputData(argv[2]);
-            //game->~SortingCompetition();
-
-            cout << "finished computation at " << ctime(&end_time) << "elapsed time: " << elapsed_seconds.count() << "s/n\n";
-
-        } else {
-            cout << "File is empty" << endl;
-            game->outputData(argv[2]);
+    for (int i = 0; i < NUM_REPS; i++)
+    {
+        //Load the unsorted data into our sorter object
+        if (!sorter.prepareData())
+        {
+            std::cerr << "Error preparing data" << std::endl;
+            return 1;
         }
 
-        //SortingCompetition *game1 = new SortingCompetition(argv[1]);
-
-        /*while (game->readData() && game->prepareData()) {
-            game->sortData();
-            game->outputData(argv[2]);
-            break;
-        }*/
-
+        //Sort the data, and time the results
+        std::chrono::time_point<std::chrono::system_clock> start, end;
+        start = std::chrono::system_clock::now();
+        sorter.sortData();
+        end = std::chrono::system_clock::now();
+        unsigned int milliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count();
+        totalMilliseconds += milliseconds;
+        std::cout << "Sort #" << i+1 << " Time: " << milliseconds << " milliseconds" << std::endl;
     }
-    return 0;
-}
 
-bool checkCommandLine(int arguments) {
-    if (arguments != 3) {
-        cout << "Invalid number of arguments in command line\n Need ./a.out <inputFile> <outputFile>" << endl;
-        return false;
-    } else {
-        cout << "Welcome to my Sorting Algorithm: \n" << endl;
-        return true;
-    }
+    //Print sorted data to a file, and print the avg.
+    sorter.outputData(argv[2]);
+    std::cout << "Average sorting time: " << totalMilliseconds / NUM_REPS << " milliseconds" << std::endl;
 }
-
