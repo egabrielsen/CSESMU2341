@@ -9,6 +9,7 @@
 
 using namespace std;
 
+//-- declare methods/functions
 bool commandLine(int);
 string removeSpace(string input);
 void readFile(char* file, LinkedList**& list, ofstream& out, int &num);
@@ -35,9 +36,6 @@ int main(int argc, char* argv[]) {
 
         // - close the output file
         output.close();
-
-
-
     }
     return 0;
 }
@@ -45,6 +43,7 @@ int main(int argc, char* argv[]) {
 void readFile(char *file, LinkedList **&list, ofstream& out, int &num) {
     ifstream f(file);
 
+    //-- used for reading in file
     string line;
     string departure;
     string arrival;
@@ -74,7 +73,6 @@ void readFile(char *file, LinkedList **&list, ofstream& out, int &num) {
             list[i] = new LinkedList(departure);
             // -- insert the first node into the Linked List
             list[i]->insert(arrival, num1);
-
         }
 
     }
@@ -129,81 +127,100 @@ void setPaths(char *file, LinkedList**& list, ofstream& out, int numF) {
     // -- read in the rest of the file
 
     for (int i = 0; i < numOfPaths; i++) {
+        // -- get information from the line and place into string variables
         getline(f, depart, ',');
         getline(f, arrive, '\n');
         depart = removeSpace(depart);
         arrive = removeSpace(arrive);
-        cout << "Flight " << i + 1 << ": " << depart << ", " << arrive << endl;
-        int cost = 0;
+
+        // display the desired flight
+        out << "Flight " << i + 1 << ": " << depart << ", " << arrive << endl;
+
+        int cost = 0; // cost will keep track if there is a flight taking place or not
         for (int i = 0; i < numF; i++) {
             if (depart == list[i]->getLabel()) {
                 int leg = 1;
-                int totalCost = 0;
-                findPath(list[i]->getHead(), depart, arrive, out, leg, totalCost);
-                cout << "Total Cost: $" << totalCost << endl;
-                cost++;
+                int totalCost = 0; // set total cost to 0 everytime at beginning
+                findPath(list[i]->getHead(), depart, arrive, out, leg, totalCost); // finds the path to destination
+                out << "Total Cost: $" << totalCost << endl; // displays the cost
+                cost++; //incriment cost by one to show that a flight plan exists
             } else {
                 // do nothing because there is no list at this point in the linked list
             }
         }
         if (cost == 0) {
-            cout << "Flight not possible" << endl;
+            // -- if cost is 0 that means there is no flight possible
+            out << "Flight not possible" << endl;
         }
-        cout << endl;
+        out << endl;
     }
 }
 
 void findPath(Node* node, string depart, string arrival, ofstream &out, int& leg, int &totalCost) {
     bool found = false;
+
+    // -- while loop runs until the node is found or if it does not exist
     while(!found) {
+        // -- if the node is the last node in the list with nowhere else to go
+            //this serves as "base case"
         if (node->getNext() == NULL && node->getTop() == NULL) {
+            // -- node either matches destination else it does not and the flight is not available
             if (node->getLabel() == arrival) {
                 totalCost += node->getCost();
-                cout << "Leg "<< leg++ << ": " << depart << " to " << node->getLabel() << " $" << node->getCost() << endl;
-                found = true;
+                // display the leg of the flight
+                out << "Leg "<< leg++ << ": " << depart << " to " << node->getLabel() << " $" << node->getCost() << endl;
+                found = true; // terminates while loop
             }
             else {
-                cout << "This flight is not available" << endl;
-                found = true;
+                out << "This flight is not available" << endl;
+                found = true; // terminates while loop
             }
+
+        // -- else if the node has a top pointer but is at the end of the current list...
         } else if (node->getNext() == NULL) {
+            // if the node is the right node, return that as the leg, recursive use findPath with the top pointer
             if (node->getLabel() == arrival) {
-                totalCost += node->getCost();
-                cout << "Leg "<< leg++ << ": " << depart << " to " << node->getLabel() << " $" << node->getCost() << endl;
-                found = true;
+                totalCost += node->getCost(); // increment the cost for total
+                out << "Leg "<< leg++ << ": " << depart << " to " << node->getLabel() << " $" << node->getCost() << endl;
+                found = true; // terminate loop
             } else {
                 totalCost += node->getCost();
-                cout << "Leg "<< leg++ << ": " << depart << " to " << node->getLabel() << " $" << node->getCost() << endl;
-                findPath(node->getTop(), node->getLabel(), arrival, out, leg, totalCost);
-                found = true;
+                out << "Leg "<< leg++ << ": " << depart << " to " << node->getLabel() << " $" << node->getCost() << endl;
+                findPath(node->getTop(), node->getLabel(), arrival, out, leg, totalCost); // find path with the top pointer node
+                found = true; // terminate loop
             }
         } else {
+            // -- go through the list and find a node that either is the right node or has a top pointer, if it has top, take the top and
+            // search through that list.
             while (node->getNext() != NULL) {
                 if (node->getLabel() == arrival) {
                     totalCost += node->getCost();
-                    cout << "Leg "<< leg++ << ": " << depart << " to " << node->getLabel() << " $" << node->getCost() << endl;
+                    out << "Leg "<< leg++ << ": " << depart << " to " << node->getLabel() << " $" << node->getCost() << endl;
                     return;
                 } else {
                     if (node->getTop() == NULL) {
-                        //totalCost += node->getCost();
-                        cout << "Flight is not available" << endl;
-                        found = true;
+                        //flight isnt available if nothing in the list matches and none of them have a top pointer
+                        out << "Flight is not available" << endl;
+                        found = true; // terminate loop
                         return;
                     } else {
+                        // -- set up a temperary node to search through list while keeping current position node
                         Node *temp = new Node(node->getLabel(), node->getCost());
                         temp->setNext(node->getNext());
                         temp->setTop(node->getTop());
+                        // go through the list and compare if equal to arrival
                         while(temp != NULL) {
                             if (temp->getLabel() == arrival) {
-                                cout << "Leg "<< leg++ << ": " << depart << " to " << temp->getLabel() << " $" << temp->getCost() << endl;
-                                found = true;
+                                out << "Leg "<< leg++ << ": " << depart << " to " << temp->getLabel() << " $" << temp->getCost() << endl;
+                                found = true; // terminate loop
                                 return;
                             } else {
-                                temp = temp->getNext();
+                                temp = temp->getNext(); // go to the next node
                             }
                         }
                         totalCost += node->getCost();
-                        cout << "Leg "<< leg++ << ": " << depart << " to " << node->getLabel() << " $" << node->getCost() << endl;
+                        out << "Leg "<< leg++ << ": " << depart << " to " << node->getLabel() << " $" << node->getCost() << endl;
+                        // if the node is still not found, branch to the top and recursively do the same thing with that list
                         findPath(node->getTop(), node->getLabel(), arrival, out, leg, totalCost);
                         return;
                     }
@@ -217,7 +234,8 @@ void findPath(Node* node, string depart, string arrival, ofstream &out, int& leg
 
 }
 
-// --
+// -- discovers if the departure already exists and returns true if it does
+// function also inserts a node to the current linked list at that particular spot if the departure list already exists.
 bool departureExist(string a, string arrival, int cost, int i, LinkedList **& list) {
     for (int j = 0; j < i; j++) {
         if (list[j]->getLabel() == a) {
@@ -228,6 +246,7 @@ bool departureExist(string a, string arrival, int cost, int i, LinkedList **& li
     return false;
 }
 
+// -- removes the extra space at the beginning of the getline
 string removeSpace(string input) {
     if (input[0] == ' ') {
         input.erase(0, 1);
@@ -235,6 +254,7 @@ string removeSpace(string input) {
     return input;
 }
 
+// -- checks to see if the right number of command line statements
 bool commandLine(int a) {
     if (a != 4) {
         cout << "Invalid Prompt\n./a.out <FlightDataFile> <PathsToCalculateFile> <OutputFile> " << endl;

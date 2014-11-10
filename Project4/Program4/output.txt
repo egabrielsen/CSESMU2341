@@ -1,0 +1,25 @@
+Flight 1: Dallas, Corpus Christi
+Leg 1: Dallas to Austin $98
+Leg 2: Austin to Houston $95
+Leg 3: Houston to Corpus Christi $78
+Total Cost: $271
+
+Flight 2: Houston, New Orleans 
+Flight is not available
+Total Cost: $0
+
+Flight 3: Austin, Houston
+Leg 1: Austin to Houston $95
+Total Cost: $95
+
+Flight 4: Austin, Dallas
+Leg 1: Austin to Dallas $99
+Total Cost: $0
+
+Flight 5: New Orleans, Dallas
+Flight not possible
+
+Flight 6: Dallas, Austin
+Leg 1: Dallas to Austin $98
+Total Cost: $98
+

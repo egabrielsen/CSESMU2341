@@ -6,12 +6,14 @@
 
 using namespace std;
 
+//-- this class is pretty straight forward. Contains standard getters and setters
+
 class Node
 {
 friend class LinkedList;
 private:
     Node* next;
-    Node* top;
+    Node* top; // top pointer will point to the header node of another list (adjacency list)
     int cost;
     string label;
     bool visited;
