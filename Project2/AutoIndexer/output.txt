@@ -1,17 +1,12 @@
 [T]
 Tree <1>
 Tree] <1>
-[T]
-Tree] <1>
 [a]
 algorithm <1>
 analysis <1>
 [a]
 analysis <1>
 apple <1>
-[a]
-apple <1>
-are <1>
 [a]
 are <1>
 [b]
@@ -22,24 +17,28 @@ binary <1>
 [c]
 clique <1>
 complexity <1>
-[c]
-complexity <1>
 [e]
 erik <1>
+example <1>
+[f]
+finder <1>
 [g]
 graph <1>
 [h]
 heap <1>
 hello <1>
 [h]
-hello <1>
 hi <1>
-[h]
-hi <1>
+[i]
+integer <1>
 [l]
 liz <1>
 [o]
 orange <1>
+[p]
+proof <1>
+[r]
+read] <1>
 [s]
 search <1>
 [t]
@@ -48,4 +47,5 @@ tree] <1>
 [t]
 tree] <1>
 [w]
+welcome <1>
 weston <1>
